@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TodoForm = props => {
+const TodoForm = props => {
     return(
       <form onSubmit={props.addTodo.bind(this, props.inputValue)}>
           <input
@@ -14,3 +14,5 @@ export const TodoForm = props => {
       </form>
     );
   }
+
+export default TodoForm;
