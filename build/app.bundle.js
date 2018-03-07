@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -261,6 +261,20 @@ process.umask = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(10);
+} else {
+  module.exports = __webpack_require__(11);
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 /**
@@ -299,7 +313,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -395,7 +409,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 };
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -419,7 +433,7 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -479,7 +493,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -493,7 +507,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(1);
+var emptyFunction = __webpack_require__(2);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -548,7 +562,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -587,7 +601,7 @@ if (getRandomValues) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -611,19 +625,19 @@ function bytesToUuid(buf, offset) {
 module.exports = bytesToUuid;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(9);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -634,6 +648,18 @@ var _uuid2 = _interopRequireDefault(_uuid);
 var _App = __webpack_require__(17);
 
 var _App2 = _interopRequireDefault(_App);
+
+var _Title = __webpack_require__(22);
+
+var _Title2 = _interopRequireDefault(_Title);
+
+var _TodoList = __webpack_require__(23);
+
+var _TodoList2 = _interopRequireDefault(_TodoList);
+
+var _TodoForm = __webpack_require__(25);
+
+var _TodoForm2 = _interopRequireDefault(_TodoForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -646,76 +672,74 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-    _inherits(App, _React$Component);
+  _inherits(App, _React$Component);
 
-    function App(props) {
-        _classCallCheck(this, App);
+  function App(props) {
+    _classCallCheck(this, App);
 
-        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.state = {
-            data: []
-        };
-        return _this;
+    _this.state = {
+      data: [],
+      text: ''
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'addTodo',
+    value: function addTodo(val) {
+      var todo = {
+        text: val,
+        id: _uuid2.default.v4()
+      };
+
+      var data = [].concat(_toConsumableArray(this.state.data), [todo]);
+      this.setState({ data: data });
+    }
+  }, {
+    key: 'updateTodo',
+    value: function updateTodo(e) {
+      this.setState({
+        text: e.target.value
+      });
+    }
+  }, {
+    key: 'removeTodo',
+    value: function removeTodo(id) {
+      var remainder = this.state.data.filter(function (todo) {
+        return todo.id !== id;
+      });
+      this.setState({ data: remainder });
     }
 
-    _createClass(App, [{
-        key: 'addTodo',
-        value: function addTodo(val) {
-            var todo = {
-                text: val,
-                id: _uuid2.default.v4()
-            };
+    //
+    // removeTodo(id) {
+    //   this.setState({
+    //     data: [...this.state.data.slice(0, id), ...this.state.data.slice(id+1)]
+    //   });
+    // }
+    //
 
-            var data = [].concat(_toConsumableArray(this.state.data), [todo]);
-            this.setState({ data: data });
-        }
-    }, {
-        key: 'removeTodo',
-        value: function removeTodo(id) {
-            var remainder = this.state.data.filter(function (todo) {
-                return todo.id !== id;
-            });
-            this.setState({ data: remainder });
-        }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: _App2.default.TodoApp },
+        _react2.default.createElement(_Title2.default, { title: 'Todo list', length: this.state.data.length }),
+        _react2.default.createElement(_TodoForm2.default, { inputValue: this.state.text,
+          updateTodo: this.updateTodo.bind(this) }),
+        _react2.default.createElement(_TodoList2.default, { todos: this.state.data,
+          remove: this.removeTodo.bind(this) })
+      );
+    }
+  }]);
 
-        //
-        // removeTodo(id) {
-        //   this.setState({
-        //     data: [...this.state.data.slice(0, id), ...this.state.data.slice(id+1)]
-        //   });
-        // }
-        //
-
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: _App2.default.TodoApp },
-                'Tutaj pojawi\u0105 si\u0119 komponenty naszej aplikacji.'
-            );
-        }
-    }]);
-
-    return App;
+  return App;
 }(_react2.default.Component);
 
 exports.default = App;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(10);
-} else {
-  module.exports = __webpack_require__(11);
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 10 */
@@ -735,9 +759,9 @@ if (process.env.NODE_ENV === 'production') {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var m = __webpack_require__(2),
-    n = __webpack_require__(3),
-    p = __webpack_require__(1),
+var m = __webpack_require__(3),
+    n = __webpack_require__(4),
+    p = __webpack_require__(2),
     q = "function" === typeof Symbol && Symbol["for"],
     r = q ? Symbol["for"]("react.element") : 60103,
     t = q ? Symbol["for"]("react.call") : 60104,
@@ -868,11 +892,11 @@ if (process.env.NODE_ENV !== "production") {
   (function () {
     'use strict';
 
-    var _assign = __webpack_require__(2);
-    var emptyObject = __webpack_require__(3);
-    var invariant = __webpack_require__(4);
-    var warning = __webpack_require__(5);
-    var emptyFunction = __webpack_require__(1);
+    var _assign = __webpack_require__(3);
+    var emptyObject = __webpack_require__(4);
+    var invariant = __webpack_require__(5);
+    var warning = __webpack_require__(6);
+    var emptyFunction = __webpack_require__(2);
     var checkPropTypes = __webpack_require__(12);
 
     // TODO: this is special because it gets imported during build.
@@ -2223,8 +2247,8 @@ if (process.env.NODE_ENV !== "production") {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(4);
-  var warning = __webpack_require__(5);
+  var invariant = __webpack_require__(5);
+  var warning = __webpack_require__(6);
   var ReactPropTypesSecret = __webpack_require__(13);
   var loggedTypeFailures = {};
 }
@@ -2315,8 +2339,8 @@ module.exports = uuid;
 "use strict";
 
 
-var rng = __webpack_require__(6);
-var bytesToUuid = __webpack_require__(7);
+var rng = __webpack_require__(7);
+var bytesToUuid = __webpack_require__(8);
 
 // **`v1()` - Generate time-based UUID**
 //
@@ -2429,8 +2453,8 @@ module.exports = v1;
 "use strict";
 
 
-var rng = __webpack_require__(6);
-var bytesToUuid = __webpack_require__(7);
+var rng = __webpack_require__(7);
+var bytesToUuid = __webpack_require__(8);
 
 function v4(options, buf, offset) {
   var i = buf && offset || 0;
@@ -3082,6 +3106,198 @@ module.exports = function (css) {
 
 	// send back the fixed css
 	return fixedCss;
+};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Title = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Title = exports.Title = function Title(props) {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'h1',
+      null,
+      props.title
+    ),
+    _react2.default.createElement(
+      'h2',
+      null,
+      props.length,
+      ' tasks'
+    )
+  );
+};
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Todo = __webpack_require__(24);
+
+var _Todo2 = _interopRequireDefault(_Todo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TodoList = function (_React$Component) {
+  _inherits(TodoList, _React$Component);
+
+  function TodoList() {
+    _classCallCheck(this, TodoList);
+
+    return _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).apply(this, arguments));
+  }
+
+  _createClass(TodoList, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'ul',
+        null,
+        this.todos
+      );
+    }
+  }, {
+    key: 'todo',
+    get: function get() {
+      var _this2 = this;
+
+      return this.props.todos.map(function (todo) {
+        return _react2.default.createElement(_Todo2.default, { id: _this2.props.id, action: todo, remove: function remove() {
+            return _this2.props.remove(id);
+          } });
+      });
+    }
+  }]);
+
+  return TodoList;
+}(_react2.default.Component);
+
+exports.default = TodoList;
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Todo = function (_React$Component) {
+  _inherits(Todo, _React$Component);
+
+  function Todo() {
+    _classCallCheck(this, Todo);
+
+    return _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).apply(this, arguments));
+  }
+
+  _createClass(Todo, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "li",
+        { id: this.props.id },
+        this.props.action,
+        _react2.default.createElement(
+          "button",
+          { className: "button", onClick: this.props.remove },
+          " REMOVE "
+        )
+      );
+    }
+  }]);
+
+  return Todo;
+}(_react2.default.Component);
+
+exports.default = Todo;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TodoForm = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TodoForm = exports.TodoForm = function TodoForm(props) {
+    return _react2.default.createElement(
+        "form",
+        { onSubmit: props.addTodo.bind(undefined, props.inputValue) },
+        _react2.default.createElement("input", {
+            type: "text",
+            placeholder: "Add Todo",
+            value: props.inputValue,
+            onChange: props.updateTodo }),
+        _react2.default.createElement(
+            "button",
+            {
+                type: "submit" },
+            "Add Todo"
+        )
+    );
 };
 
 /***/ })

@@ -1,12 +1,16 @@
 import React from 'react';
 import uuid from 'uuid';
 import style from './App.css';
+import Title from '../components/Title';
+import TodoList from '../components/TodoList';
+import TodoForm from '../components/TodoForm';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        data: []
+        data: [],
+        text:''
     };
   }
 
@@ -18,6 +22,12 @@ class App extends React.Component {
 
     const data = [...this.state.data, todo];
     this.setState({data});
+  }
+
+  updateTodo(e) {
+    this.setState({
+      text: e.target.value
+    });
   }
 
   removeTodo(id) {
@@ -36,7 +46,11 @@ class App extends React.Component {
   render() {
       return (
           <div className={style.TodoApp}>
-            KOMPONENTY
+            <Title title="Todo list" length={this.state.data.length} />
+            <TodoForm inputValue={this.state.text}
+                      updateTodo={this.updateTodo.bind(this)} />
+            <TodoList todos={this.state.data}
+                      remove={this.removeTodo.bind(this)} />
           </div>
       );
   }
