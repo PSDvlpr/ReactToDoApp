@@ -20,7 +20,7 @@ updateTodo(e) {
 
 handleSubmit(e) {
   e.preventDefault();
-  this.props.addTodo(this.state.text);
+  this.props.add(this.state.text);
   this.setState ({
     text: ''
   });

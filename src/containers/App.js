@@ -16,6 +16,7 @@ class App extends React.Component {
     this.removeTodo = this.removeTodo.bind(this);
   }
 
+
   addTodo(val) {
     const todo = {
       text: val,
@@ -45,7 +46,7 @@ class App extends React.Component {
       return (
           <div className={style.TodoApp}>
             <Title title="Todo list" length={this.state.data.length} />
-            <TodoForm addTodo={this.addTodo(val)}/>
+            <TodoForm add={this.addTodo}/>
             <TodoList todos={this.state.data}
                       remove={this.removeTodo} />
           </div>

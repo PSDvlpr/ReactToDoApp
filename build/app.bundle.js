@@ -7869,7 +7869,7 @@ var App = function (_React$Component) {
         'div',
         { className: _App2.default.TodoApp },
         _react2.default.createElement(_Title2.default, { title: 'Todo list', length: this.state.data.length }),
-        _react2.default.createElement(_TodoForm2.default, { addTodo: this.addTodo(val) }),
+        _react2.default.createElement(_TodoForm2.default, { add: this.addTodo }),
         _react2.default.createElement(_TodoList2.default, { todos: this.state.data,
           remove: this.removeTodo })
       );
@@ -8735,7 +8735,6 @@ var TodoList = function TodoList(_ref) {
   var todos = _ref.todos,
       remove = _ref.remove;
 
-
   var tasks = todos.map(function (todo) {
     return _react2.default.createElement(_Todo2.default, { key: todo.id, task: todo, remove: remove });
   });
@@ -8838,7 +8837,7 @@ var TodoForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.addTodo(this.state.text);
+      this.props.add(this.state.text);
       this.setState({
         text: ''
       });
