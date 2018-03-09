@@ -45,7 +45,7 @@ class App extends React.Component {
       return (
           <div className={style.TodoApp}>
             <Title title="Todo list" length={this.state.data.length} />
-            <TodoForm addTodo={this.addTodo}/>
+            <TodoForm addTodo={this.addTodo(val)}/>
             <TodoList todos={this.state.data}
                       remove={this.removeTodo} />
           </div>

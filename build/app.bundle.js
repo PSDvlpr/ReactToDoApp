@@ -7869,7 +7869,7 @@ var App = function (_React$Component) {
         'div',
         { className: _App2.default.TodoApp },
         _react2.default.createElement(_Title2.default, { title: 'Todo list', length: this.state.data.length }),
-        _react2.default.createElement(_TodoForm2.default, { addTodo: this.addTodo }),
+        _react2.default.createElement(_TodoForm2.default, { addTodo: this.addTodo(val) }),
         _react2.default.createElement(_TodoList2.default, { todos: this.state.data,
           remove: this.removeTodo })
       );
@@ -8735,14 +8735,15 @@ var TodoList = function TodoList(_ref) {
   var todos = _ref.todos,
       remove = _ref.remove;
 
-  var Todos = todos.map(function (todo) {
+
+  var tasks = todos.map(function (todo) {
     return _react2.default.createElement(_Todo2.default, { key: todo.id, task: todo, remove: remove });
   });
 
   return _react2.default.createElement(
     'ol',
     null,
-    Todos
+    tasks
   );
 };
 
@@ -8766,16 +8767,16 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Todo = function Todo(_ref) {
-  var todo = _ref.todo,
+  var task = _ref.task,
       remove = _ref.remove;
 
   return _react2.default.createElement(
     "li",
     null,
-    todo.text,
+    task.text,
     _react2.default.createElement(
       "button",
-      { className: "button", onClick: undefined.remove(todo.id) },
+      { className: "button", onClick: remove(task.id) },
       " REMOVE "
     )
   );
