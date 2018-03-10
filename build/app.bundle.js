@@ -8690,19 +8690,22 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Title = function Title(props) {
+var Title = function Title(_ref) {
+  var title = _ref.title,
+      length = _ref.length;
+
   return _react2.default.createElement(
     'div',
     null,
     _react2.default.createElement(
       'h1',
       null,
-      props.title
+      title
     ),
     _react2.default.createElement(
       'h2',
       null,
-      props.length,
+      length,
       ' tasks'
     )
   );
