@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeJsPlugin = require('optimize-js-plugin');
-
 module.exports = {
     entry: './src/index.js',
         output: {
@@ -25,6 +24,15 @@ module.exports = {
                 options: {
                   modules: true
                 }
+            }
+          ]
+        },
+        {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {}
             }
           ]
         }

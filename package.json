@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack",
-    "start": "webpack-dev-server --config ./webpack.config.js",
+    "start": "webpack-dev-server --inline --hot --config ./webpack.config.js",
     "server": "http-server"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.10",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.0.6",
     "http-server": "^0.11.1",
     "optimize-js-plugin": "0.0.4",
@@ -28,6 +29,7 @@
     "webpack-dev-server": "^2.11.2"
   },
   "dependencies": {
+    "react-flip-move": "^3.0.1",
     "uuid": "^3.2.1"
   }
 }

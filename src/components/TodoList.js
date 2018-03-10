@@ -1,5 +1,7 @@
 import React from 'react';
 import Todo from './Todo';
+import style from './TodoList.css';
+
 
 const TodoList = ({todos, remove}) => {
   const tasks = todos.map(todo => {
@@ -8,8 +10,8 @@ const TodoList = ({todos, remove}) => {
   );
 
   return (
-    <ol>
-      {tasks}
+    <ol className={style.TodoList}>
+        {tasks}
     </ol>
   );
 }
