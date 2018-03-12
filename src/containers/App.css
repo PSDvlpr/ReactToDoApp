@@ -1,6 +1,6 @@
 .TodoApp {
-
-    background-color: #7DCBFA;
+    background: #333 url('../img/black_denim.jpg');
+    /* background-color: #7DCBFA; */
     color: #222;
     display: flex;
     flex-direction: column;
