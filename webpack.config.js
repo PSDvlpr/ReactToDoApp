@@ -29,7 +29,7 @@ module.exports = {
           './src/index.js'
         ],
         output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'docs'),
         filename: 'app.bundle.js'
     },
     module: {
